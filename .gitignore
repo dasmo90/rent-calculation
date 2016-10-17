@@ -1,0 +1,13 @@
+.gulp-scss-cache
+.sass-cache
+.vs/
+bin/
+dist/
+node_modules/
+obj/
+typings/
+
+*.csproj
+*.csproj.user
+*.sln
+*.config
