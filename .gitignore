@@ -1,12 +1,16 @@
-.gulp-scss-cache
-.sass-cache
+.gulp-scss-cache/
+.sass-cache/
 .vs/
+.idea/
+
 bin/
 dist/
 node_modules/
 obj/
+target/
 typings/
 
+*.iml
 *.csproj
 *.csproj.user
 *.sln
