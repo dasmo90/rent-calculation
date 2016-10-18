@@ -1,4 +1,4 @@
-package de.dasmo90.business.rc;
+package de.dasmo90.business.rc.api;
 
 public interface Identifyable {
 
