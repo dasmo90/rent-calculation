@@ -6,6 +6,8 @@ import de.dasmo90.business.rc.test.TestEntityProducer;
 import de.dasmo90.business.rc.test.TestSpringPersistenceConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -23,6 +25,8 @@ import java.util.List;
 		TestSpringPersistenceConfig.class
 })
 public class RcPersistenceTest {
+
+	private Logger LOG = LoggerFactory.getLogger(RcPersistenceTest.class);
 
 	@Autowired
 	private TestEntityProducer testEntityProducer;
@@ -42,8 +46,6 @@ public class RcPersistenceTest {
 		List<RentCalculation> resultList =
 				entityManager.createQuery("SELECT e FROM RentCalculationEntity e", RentCalculation.class).getResultList();
 
-		System.out.println("====================================");
-		System.out.println(Arrays.toString(resultList.toArray()));
-		System.out.println("====================================");
+		LOG.info(Arrays.toString(resultList.stream().map(RentCalculation::getName).toArray()));
 	}
 }
