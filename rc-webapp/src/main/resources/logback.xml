@@ -12,7 +12,7 @@
 	<logger name="org.jboss.logging" level="WARN"/>
 
 	<!-- Spring logging -->
-	<logger name="org.springframework" level="DEBUG"/>
+	<logger name="org.springframework" level="WARN"/>
 
 	<!-- Hibernate logging -->
 	<logger name="org.hibernate" level="WARN"/>

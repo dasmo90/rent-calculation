@@ -9,8 +9,34 @@
 	<packaging>pom</packaging>
 	<version>1.0-SNAPSHOT</version>
 
+	<properties>
+		<spring.version>4.3.3.RELEASE</spring.version>
+		<spring.security.version>4.1.3.RELEASE</spring.security.version>
+	</properties>
+
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>rent-calculator-core-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>rent-calculator-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>rent-calculator-mocks</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>rent-calculator-webapp</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>javax.validation</groupId>
 				<artifactId>validation-api</artifactId>
@@ -69,6 +95,7 @@
 
 	<modules>
 		<module>rc-core-api</module>
+		<module>rc-mocks</module>
 		<module>rc-core</module>
 		<module>rc-webapp</module>
 	</modules>

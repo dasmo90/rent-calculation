@@ -27,11 +27,11 @@ public class UserEntity implements User {
 	public UserEntity(User user) {
 		id = user.getId();
 		name = user.getName();
-		passwordSalt = user.getPasswordSalt();
+		passwordSalt = user.getEncryptedPassword();
 	}
 
 	@Override
-	public String getPasswordSalt() {
+	public String getEncryptedPassword() {
 		return passwordSalt;
 	}
 

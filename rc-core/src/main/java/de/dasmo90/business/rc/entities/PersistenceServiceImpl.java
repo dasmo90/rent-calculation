@@ -1,6 +1,7 @@
 package de.dasmo90.business.rc.entities;
 
 import de.dasmo90.business.rc.model.RentCalculation;
+import de.dasmo90.business.rc.model.User;
 import de.dasmo90.business.rc.service.PersistenceService;
 import org.springframework.stereotype.Service;
 
@@ -8,12 +9,12 @@ import org.springframework.stereotype.Service;
 public class PersistenceServiceImpl implements PersistenceService {
 
 	@Override
-	public boolean save(RentCalculation rentCalculation) {
+	public boolean save(User user, RentCalculation rentCalculation) {
 		return false;
 	}
 
 	@Override
-	public RentCalculation create() {
+	public RentCalculation create(User user) {
 		return null;
 	}
 
