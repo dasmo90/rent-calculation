@@ -6,5 +6,5 @@ public interface PersistenceService {
 
 	boolean save(RentCalculation rentCalculation);
 
-	void createRentCalculation();
+	RentCalculation create();
 }

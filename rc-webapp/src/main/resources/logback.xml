@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type
+			 ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- JBoss logging -->
+	<logger name="org.jboss.logging" level="WARN"/>
+
+	<!-- Spring logging -->
+	<logger name="org.springframework" level="DEBUG"/>
+
+	<!-- Hibernate logging -->
+	<logger name="org.hibernate" level="WARN"/>
+	<logger name="org.hibernate.tool.hbm2ddl.SchemaExport" level="OFF"/>
+
+	<root level="debug">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>

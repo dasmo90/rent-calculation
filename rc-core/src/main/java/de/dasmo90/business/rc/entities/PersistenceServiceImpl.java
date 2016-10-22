@@ -1,4 +1,4 @@
-package de.dasmo90.business.rc;
+package de.dasmo90.business.rc.entities;
 
 import de.dasmo90.business.rc.model.RentCalculation;
 import de.dasmo90.business.rc.service.PersistenceService;
@@ -13,7 +13,8 @@ public class PersistenceServiceImpl implements PersistenceService {
 	}
 
 	@Override
-	public void createRentCalculation() {
-
+	public RentCalculation create() {
+		return null;
 	}
+
 }

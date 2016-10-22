@@ -11,13 +11,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>rent-calculator-webapp</artifactId>
+    <name>rc-webapp</name>
 	<packaging>war</packaging>
 
 	<dependencies>
 		<dependency>
-			<groupId>${parent.groupId}</groupId>
+			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>rent-calculator-core</artifactId>
-			<version>${parent.version}</version>
+			<version>${project.parent.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 
@@ -35,9 +36,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>${parent.groupId}</groupId>
+			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>rent-calculator-core-api</artifactId>
-			<version>${parent.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -56,5 +57,29 @@
 			<version>2.8.0</version>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<finalName>rc-webapp</finalName>
+		<plugins>
+			<plugin>
+				<groupId>de.dasmo90.maven-plugins</groupId>
+				<artifactId>dto-gen-plugin</artifactId>
+				<version>1.0-SNAPSHOT</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate-dtos</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<generateSetters>true</generateSetters>
+					<packagePrefixes>
+						<packagePrefix>de.dasmo90.business.rc.model</packagePrefix>
+					</packagePrefixes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

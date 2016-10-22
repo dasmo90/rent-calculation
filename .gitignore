@@ -10,6 +10,8 @@ obj/
 target/
 typings/
 
+tomcat/
+
 *.iml
 *.csproj
 *.csproj.user

@@ -1,8 +1,10 @@
 package de.dasmo90.business.rc.model;
 
+import java.util.List;
+
 public interface Recurrence {
 
-	RecurrenceUnit getUnit();
+	List<RentCalculation> getUnit();
 
 	int getValue();
 }
