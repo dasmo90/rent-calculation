@@ -10,12 +10,13 @@ obj/
 target/
 typings/
 
-tomcat/*
-!tomcat/conf
-tomcat/conf/*
-!tomcat/conf/Catalina
-!tomcat/conf/server.xml
-!tomcat/conf/context.xml
+rc-tomcat/*
+!rc-tomcat/conf
+!rc-tomcat/pom.xml
+rc-tomcat/conf/*
+!rc-tomcat/conf/Catalina
+!rc-tomcat/conf/server.xml
+!rc-tomcat/conf/context.xml
 
 *.iml
 *.csproj
