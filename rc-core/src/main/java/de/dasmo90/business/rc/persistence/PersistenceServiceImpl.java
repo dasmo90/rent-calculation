@@ -1,4 +1,4 @@
-package de.dasmo90.business.rc.entities;
+package de.dasmo90.business.rc.persistence;
 
 import de.dasmo90.business.rc.model.RentCalculation;
 import de.dasmo90.business.rc.model.User;

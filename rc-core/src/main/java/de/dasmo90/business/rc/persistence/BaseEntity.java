@@ -1,4 +1,4 @@
-package de.dasmo90.business.rc.entities;
+package de.dasmo90.business.rc.persistence;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

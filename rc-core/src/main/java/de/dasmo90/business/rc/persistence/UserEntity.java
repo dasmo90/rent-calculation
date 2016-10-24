@@ -1,4 +1,4 @@
-package de.dasmo90.business.rc.entities;
+package de.dasmo90.business.rc.persistence;
 
 import de.dasmo90.business.rc.model.User;
 
@@ -23,10 +23,6 @@ public class UserEntity implements User {
 	protected UserEntity() {
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	protected void merge(User user) {
 		name = user.getName();
 		passwordSalt = user.getEncryptedPassword();
@@ -40,6 +36,10 @@ public class UserEntity implements User {
 	@Override
 	public long getId() {
 		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	@Override

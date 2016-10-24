@@ -1,14 +1,12 @@
-package de.dasmo90.business.rc.entities;
+package de.dasmo90.business.rc.persistence;
 
 import de.dasmo90.business.rc.api.Auditable;
 import de.dasmo90.business.rc.model.User;
 
-import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.PostLoad;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotNull;
@@ -34,6 +32,13 @@ public abstract class BaseAuditableEntity extends BaseEntity implements Auditabl
 		return creator;
 	}
 
+	protected final void setCreator(@NotNull User creator) {
+		if (creator == null) {
+			throw new IllegalArgumentException("Creator cannot be null.");
+		}
+		this.creator = createUserEntity(creator);
+	}
+
 	@Override
 	public LocalDateTime getCreated() {
 		return created;
@@ -44,23 +49,16 @@ public abstract class BaseAuditableEntity extends BaseEntity implements Auditabl
 		return modifier;
 	}
 
-	@Override
-	public LocalDateTime getLastModified() {
-		return lastModified;
-	}
-
-	protected final void setCreator(@NotNull User creator) {
-		if (creator == null) {
-			throw new IllegalArgumentException("Creator cannot be null.");
-		}
-		this.creator = createUserEntity(creator);
-	}
-
 	protected final void setModifier(@NotNull User modifier) {
 		if (modifier == null) {
 			throw new IllegalArgumentException("Modifier cannot be null.");
 		}
 		this.modifier = createUserEntity(modifier);
+	}
+
+	@Override
+	public LocalDateTime getLastModified() {
+		return lastModified;
 	}
 
 	@PreUpdate
@@ -69,10 +67,10 @@ public abstract class BaseAuditableEntity extends BaseEntity implements Auditabl
 		if (this.created == null) {
 			throw new IllegalStateException("No creation date set.");
 		}
-		if(this.creator == null) {
+		if (this.creator == null) {
 			throw new IllegalStateException("No creator was set in rent calculation was set.");
 		}
-		if(this.modifier == null) {
+		if (this.modifier == null) {
 			throw new IllegalStateException("No modifier was set in rent calculation was set.");
 		}
 	}
@@ -81,14 +79,14 @@ public abstract class BaseAuditableEntity extends BaseEntity implements Auditabl
 	public void prePersist() {
 		this.created = LocalDateTime.now();
 		this.lastModified = LocalDateTime.from(this.created);
-		if(this.creator == null) {
+		if (this.creator == null) {
 			throw new IllegalStateException("No creator was set in rent calculation was set.");
 		}
 		this.modifier = createUserEntity(this.creator);
 	}
 
 	private UserEntity createUserEntity(User user) {
-		if(user == null) {
+		if (user == null) {
 			return null;
 		}
 		UserEntity userEntity = new UserEntity();

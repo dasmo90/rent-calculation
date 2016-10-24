@@ -10,7 +10,12 @@ obj/
 target/
 typings/
 
-tomcat/
+tomcat/*
+!tomcat/conf
+tomcat/conf/*
+!tomcat/conf/Catalina
+!tomcat/conf/server.xml
+!tomcat/conf/context.xml
 
 *.iml
 *.csproj

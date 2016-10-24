@@ -1,4 +1,4 @@
-package de.dasmo90.business.rc.entities;
+package de.dasmo90.business.rc.persistence;
 
 import de.dasmo90.business.rc.model.RentCalculation;
 import de.dasmo90.business.rc.model.User;
@@ -15,7 +15,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.util.Arrays;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -1,8 +1,8 @@
-package de.dasmo90.business.rc.test;
+package de.dasmo90.business.rc.spring;
 
-import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -14,23 +14,22 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-public class TestSpringPersistenceConfig {
+public class PersistenceConfiguration {
 
-	private DataSource dataSource() {
-		BasicDataSource basicDataSource = new BasicDataSource();
-		basicDataSource.setDriverClassName(org.hsqldb.jdbcDriver.class.getName());
-		basicDataSource.setUrl("jdbc:hsqldb:mem:db");
-		basicDataSource.setUsername("sa");
-		basicDataSource.setPassword("");
-		return basicDataSource;
-	}
+	public static final String DATA_SOURCE = "jdbc/RentCalculationMySqlDataSource";
+	public static final String PERSISTENCE_UNIT_NAME = "rc-unit";
+
+	public static final String ENTITY_PACKAGE = "de.dasmo90.business.rc.persistence";
+
+//	@Resource(name = DATA_SOURCE)
+	private DataSource dataSource = new JndiDataSourceLookup().getDataSource(DATA_SOURCE);
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
 		LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
-		emfb.setDataSource(dataSource());
-		emfb.setPackagesToScan("de.dasmo90.business.rc.persistence");
-		emfb.setPersistenceUnitName("rc-unit");
+		emfb.setDataSource(dataSource);
+		emfb.setPackagesToScan(ENTITY_PACKAGE);
+		emfb.setPersistenceUnitName(PERSISTENCE_UNIT_NAME);
 
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		emfb.setJpaVendorAdapter(vendorAdapter);
@@ -42,9 +41,7 @@ public class TestSpringPersistenceConfig {
 	private Properties additionalProperties() {
 
 		Properties properties = new Properties();
-		properties.setProperty("hibernate.show_sql", "true");
-		properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-		properties.setProperty("hibernate.dialect", org.hibernate.dialect.HSQLDialect.class.getName());
+		properties.setProperty("hibernate.dialect", org.hibernate.dialect.MySQLDialect.class.getName());
 		return properties;
 	}
 
