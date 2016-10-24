@@ -1,7 +1,7 @@
-package de.dasmo90.business.rc.persistence;
+package de.dasmo90.business.rc.entities;
 
-import de.dasmo90.business.rc.entities.RentCalculationEntity;
 import de.dasmo90.business.rc.model.RentCalculation;
+import de.dasmo90.business.rc.model.User;
 import de.dasmo90.business.rc.test.TestEntityProducer;
 import de.dasmo90.business.rc.test.TestSpringPersistenceConfig;
 import org.junit.Test;
@@ -35,17 +35,29 @@ public class RcPersistenceTest {
 	private EntityManager entityManager;
 
 	@Test
-	public void testName() throws Exception {
+	public void testPersistence() throws Exception {
 
-		RentCalculationEntity rentCalculationEntity = new RentCalculationEntity(testEntityProducer.produce(0, "Test"));
+		User testuser = testEntityProducer.produceUser(27, "Testuser");
+		UserEntity userEntity = new UserEntity();
+		userEntity.merge(testuser);
+		entityManager.persist(userEntity);
+		entityManager.flush();
+
+		RentCalculationEntity rentCalculationEntity = new RentCalculationEntity();
+		rentCalculationEntity.merge(testEntityProducer.produceRentCalculation(0, "Test"));
+		rentCalculationEntity.setCreator(userEntity);
 
 		entityManager.persist(rentCalculationEntity);
+		entityManager.flush();
 
+		rentCalculationEntity.merge(testEntityProducer.produceRentCalculation(55, "Blubb"));
+
+		entityManager.persist(rentCalculationEntity);
 		entityManager.flush();
 
 		List<RentCalculation> resultList =
 				entityManager.createQuery("SELECT e FROM RentCalculationEntity e", RentCalculation.class).getResultList();
 
-		LOG.info(Arrays.toString(resultList.stream().map(RentCalculation::getName).toArray()));
+		LOG.info(resultList.toString());
 	}
 }

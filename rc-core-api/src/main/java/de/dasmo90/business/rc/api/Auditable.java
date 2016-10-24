@@ -6,11 +6,11 @@ import java.time.LocalDateTime;
 
 public interface Auditable {
 
-	User getChanger();
+	User getCreator();
 
 	User getModifier();
 
-	LocalDateTime getLastChanged();
+	LocalDateTime getCreated();
 
 	LocalDateTime getLastModified();
 }

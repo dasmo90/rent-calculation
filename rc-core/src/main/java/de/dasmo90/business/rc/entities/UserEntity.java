@@ -21,11 +21,13 @@ public class UserEntity implements User {
 	private String passwordSalt;
 
 	protected UserEntity() {
-
 	}
 
-	public UserEntity(User user) {
-		id = user.getId();
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	protected void merge(User user) {
 		name = user.getName();
 		passwordSalt = user.getEncryptedPassword();
 	}

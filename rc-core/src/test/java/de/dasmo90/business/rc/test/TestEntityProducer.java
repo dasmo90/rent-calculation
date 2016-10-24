@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public class TestEntityProducer {
 
-	public RentCalculation produce(long id, String name) {
+	public RentCalculation produceRentCalculation(long id, String name) {
 		return new RentCalculation() {
 
 			@Override
@@ -21,23 +21,22 @@ public class TestEntityProducer {
 			}
 
 			@Override
-			public User getChanger() {
-				return null;
+			public long getId() {
+				return id;
 			}
 
 			@Override
-			public User getModifier() {
-				return null;
+			public String getName() {
+				return name;
 			}
+		};
+	}
 
+	public User produceUser(long id, String name) {
+		return new User() {
 			@Override
-			public LocalDateTime getLastChanged() {
-				return null;
-			}
-
-			@Override
-			public LocalDateTime getLastModified() {
-				return null;
+			public String getEncryptedPassword() {
+				return "enc";
 			}
 
 			@Override
