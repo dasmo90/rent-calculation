@@ -2,7 +2,7 @@ package de.dasmo90.business.rc.web.controller;
 
 import de.dasmo90.business.rc.model.RentCalculation;
 import de.dasmo90.business.rc.model.RentCalculationDto;
-import de.dasmo90.business.rc.model.User;
+import de.dasmo90.business.rc.api.User;
 import de.dasmo90.business.rc.service.PersistenceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

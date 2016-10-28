@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface Recurrence {
 
-	List<RentCalculation> getUnit();
+	List<RecurrenceUnit> getUnit();
 
 	int getValue();
 }

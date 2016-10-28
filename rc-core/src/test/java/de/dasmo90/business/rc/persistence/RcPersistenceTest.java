@@ -1,7 +1,7 @@
 package de.dasmo90.business.rc.persistence;
 
+import de.dasmo90.business.rc.api.User;
 import de.dasmo90.business.rc.model.RentCalculation;
-import de.dasmo90.business.rc.model.User;
 import de.dasmo90.business.rc.test.TestEntityProducer;
 import de.dasmo90.business.rc.test.TestSpringPersistenceConfig;
 import org.junit.Test;
@@ -11,10 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)

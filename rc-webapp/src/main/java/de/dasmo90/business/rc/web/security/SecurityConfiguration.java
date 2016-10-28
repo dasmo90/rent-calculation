@@ -1,6 +1,6 @@
 package de.dasmo90.business.rc.web.security;
 
-import de.dasmo90.business.rc.model.User;
+import de.dasmo90.business.rc.api.User;
 import de.dasmo90.business.rc.permissions.Role;
 import de.dasmo90.business.rc.service.PermissionService;
 import de.dasmo90.business.rc.service.UserService;

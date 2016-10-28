@@ -1,7 +1,7 @@
 package de.dasmo90.business.rc.persistence;
 
 import de.dasmo90.business.rc.api.Auditable;
-import de.dasmo90.business.rc.model.User;
+import de.dasmo90.business.rc.api.User;
 
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;

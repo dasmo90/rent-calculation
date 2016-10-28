@@ -93,11 +93,37 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>Windows</id>
+			<activation>
+				<os>
+					<family>Windows</family>
+				</os>
+			</activation>
+			<properties>
+				<script.extension>.bat</script.extension>
+			</properties>
+		</profile>
+		<profile>
+			<id>unix</id>
+			<activation>
+				<os>
+					<family>unix</family>
+				</os>
+			</activation>
+			<properties>
+				<script.extension>.sh</script.extension>
+			</properties>
+		</profile>
+	</profiles>
+
 	<modules>
 		<module>rc-core-api</module>
 		<module>rc-mocks</module>
 		<module>rc-core</module>
 		<module>rc-webapp</module>
+		<module>rc-tomcat</module>
 	</modules>
 
 </project>

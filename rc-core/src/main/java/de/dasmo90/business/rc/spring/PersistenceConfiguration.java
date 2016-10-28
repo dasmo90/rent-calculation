@@ -21,7 +21,6 @@ public class PersistenceConfiguration {
 
 	public static final String ENTITY_PACKAGE = "de.dasmo90.business.rc.persistence";
 
-//	@Resource(name = DATA_SOURCE)
 	private DataSource dataSource = new JndiDataSourceLookup().getDataSource(DATA_SOURCE);
 
 	@Bean

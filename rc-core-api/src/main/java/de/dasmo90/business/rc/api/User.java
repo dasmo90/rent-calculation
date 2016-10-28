@@ -1,4 +1,4 @@
-package de.dasmo90.business.rc.model;
+package de.dasmo90.business.rc.api;
 
 import de.dasmo90.business.rc.api.Identifyable;
 

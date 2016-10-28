@@ -51,7 +51,7 @@
           username="root"
           password=""
           driverClassName="com.mysql.jdbc.Driver"
-          url="jdbc:mysql:localhost:3306/rc"
+          url="dbc:mysql://localhost/rc?serverTimezone=UTC"
           maxActive="15"
           maxIdle="3" />
   </GlobalNamingResources>

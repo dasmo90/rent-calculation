@@ -2,10 +2,9 @@ package de.dasmo90.business.rc.test;
 
 import de.dasmo90.business.rc.model.RentCalculation;
 import de.dasmo90.business.rc.model.RentCalculationPosition;
-import de.dasmo90.business.rc.model.User;
+import de.dasmo90.business.rc.api.User;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 

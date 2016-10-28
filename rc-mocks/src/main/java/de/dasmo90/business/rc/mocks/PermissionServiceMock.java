@@ -1,7 +1,8 @@
 package de.dasmo90.business.rc.mocks;
 
+import de.dasmo90.business.rc.api.Auditable;
 import de.dasmo90.business.rc.model.RentCalculation;
-import de.dasmo90.business.rc.model.User;
+import de.dasmo90.business.rc.api.User;
 import de.dasmo90.business.rc.permissions.Role;
 import de.dasmo90.business.rc.service.PermissionService;
 import org.springframework.context.annotation.Primary;
@@ -15,12 +16,12 @@ import java.util.List;
 public class PermissionServiceMock implements PermissionService {
 
 	@Override
-	public boolean canRead(User user, RentCalculation rentCalculation) {
+	public boolean canRead(User user, Auditable rentCalculation) {
 		return true;
 	}
 
 	@Override
-	public boolean canUpdate(User user, RentCalculation rentCalculation) {
+	public boolean canUpdate(User user, Auditable rentCalculation) {
 		return true;
 	}
 

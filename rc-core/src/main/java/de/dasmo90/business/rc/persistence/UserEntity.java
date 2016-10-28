@@ -1,16 +1,31 @@
 package de.dasmo90.business.rc.persistence;
 
-import de.dasmo90.business.rc.model.User;
+import de.dasmo90.business.rc.api.User;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "RENT_CALCULATION_POSITION")
+@NamedQueries(
+		@NamedQuery(
+				name = UserEntity.Query.GET_BY_NAME,
+				query = "SELECT user FROM UserEntity user WHERE user.name = :" + UserEntity.Param.NAME)
+)
 public class UserEntity implements User {
+
+	public interface Query {
+		String GET_BY_NAME = "getByName";
+	}
+
+	public interface Param {
+		String NAME = "name";
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

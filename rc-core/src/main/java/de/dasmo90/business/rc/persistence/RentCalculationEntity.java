@@ -1,9 +1,11 @@
 package de.dasmo90.business.rc.persistence;
 
+import de.dasmo90.business.rc.AuditableRentCalculation;
 import de.dasmo90.business.rc.api.Auditable;
 import de.dasmo90.business.rc.model.RentCalculation;
 import de.dasmo90.business.rc.model.RentCalculationPosition;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -12,11 +14,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "RENT_CALCULATION")
-public class RentCalculationEntity extends BaseAuditableEntity implements RentCalculation, Auditable {
+public class RentCalculationEntity extends BaseAuditableEntity implements AuditableRentCalculation {
 
 	private String name;
 
-	@OneToMany(targetEntity = RentCalculationPositionEntity.class)
+	@OneToMany(targetEntity = RentCalculationPositionEntity.class, cascade = CascadeType.ALL)
 	private List<RentCalculationPosition> rentCalculationPositions;
 
 	protected RentCalculationEntity() {

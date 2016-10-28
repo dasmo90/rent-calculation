@@ -1,6 +1,6 @@
 package de.dasmo90.business.rc.mocks;
 
-import de.dasmo90.business.rc.model.User;
+import de.dasmo90.business.rc.api.User;
 import de.dasmo90.business.rc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;

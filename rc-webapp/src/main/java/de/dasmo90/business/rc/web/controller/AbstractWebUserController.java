@@ -1,8 +1,6 @@
 package de.dasmo90.business.rc.web.controller;
 
-import de.dasmo90.business.rc.model.User;
-import de.dasmo90.business.rc.permissions.Role;
-import de.dasmo90.business.rc.service.PermissionService;
+import de.dasmo90.business.rc.api.User;
 import de.dasmo90.business.rc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

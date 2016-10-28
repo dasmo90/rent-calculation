@@ -1,6 +1,5 @@
 <Context 
   docBase="../../rc-webapp/target/rc-webapp"
-  reloadable="true"
-  antiResourceLocking="true">
+  reloadable="true">
 
 </Context>
