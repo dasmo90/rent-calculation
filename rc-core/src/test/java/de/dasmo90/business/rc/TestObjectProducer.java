@@ -11,6 +11,8 @@ import java.util.List;
 @Component
 public class TestObjectProducer {
 
+	public static final String USER_PASSWORD = "enc";
+
 	public RentCalculation produceRentCalculation(long id, String name) {
 		return new RentCalculation() {
 
@@ -35,7 +37,7 @@ public class TestObjectProducer {
 		return new User() {
 			@Override
 			public String getEncryptedPassword() {
-				return "enc";
+				return USER_PASSWORD;
 			}
 
 			@Override
