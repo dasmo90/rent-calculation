@@ -55,7 +55,7 @@ public class PermissionServiceTest {
 		Mockito.reset(userServiceMock);
 
 		this.testUser = new UserEntity();
-		this.testUser.merge(testObjectProducer.produceUser(0, USER_NAME));
+		this.testUser.merge(testObjectProducer.produceUser(USER_NAME));
 
 		this.entityManager.persist(testUser);
 
@@ -80,7 +80,7 @@ public class PermissionServiceTest {
 
 		Mockito.when(this.userServiceMock.fetchUserByName(USER_NAME)).thenReturn(this.testUser);
 
-		List<Role> roles = this.permissionService.fetchRolesFor(this.testObjectProducer.produceUser(0, USER_NAME));
+		List<Role> roles = this.permissionService.fetchRolesFor(this.testObjectProducer.produceUser(USER_NAME));
 
 		Assert.assertEquals(1, roles.size());
 		Assert.assertEquals(Role.ADMIN, roles.get(0));

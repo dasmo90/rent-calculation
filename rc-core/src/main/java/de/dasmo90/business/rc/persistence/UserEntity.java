@@ -15,7 +15,9 @@ import javax.persistence.Table;
 @NamedQueries(
 		@NamedQuery(
 				name = UserEntity.Query.GET_BY_NAME,
-				query = "SELECT user FROM UserEntity user WHERE user.name = :" + UserEntity.Param.NAME)
+				query = "SELECT user " +
+						"FROM UserEntity user " +
+						"WHERE user.name = :" + UserEntity.Param.NAME)
 )
 public class UserEntity implements User {
 

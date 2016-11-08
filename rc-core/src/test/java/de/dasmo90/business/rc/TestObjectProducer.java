@@ -1,8 +1,8 @@
 package de.dasmo90.business.rc;
 
+import de.dasmo90.business.rc.api.User;
 import de.dasmo90.business.rc.model.RentCalculation;
 import de.dasmo90.business.rc.model.RentCalculationPosition;
-import de.dasmo90.business.rc.api.User;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -33,7 +33,7 @@ public class TestObjectProducer {
 		};
 	}
 
-	public User produceUser(long id, String name) {
+	public User produceUser(String name) {
 		return new User() {
 			@Override
 			public String getEncryptedPassword() {
@@ -42,7 +42,7 @@ public class TestObjectProducer {
 
 			@Override
 			public long getId() {
-				return id;
+				return 0;
 			}
 
 			@Override

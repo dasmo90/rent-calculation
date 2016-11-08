@@ -36,7 +36,7 @@ public class RcPersistenceTest {
 	@Test
 	public void testPersistence() throws Exception {
 
-		User testuser = testObjectProducer.produceUser(27, "Testuser");
+		User testuser = testObjectProducer.produceUser("Testuser");
 		UserEntity userEntity = new UserEntity();
 		userEntity.merge(testuser);
 		entityManager.persist(userEntity);

@@ -40,9 +40,9 @@ public class UserServiceTest {
 	public void testOneUser() throws Exception {
 
 		UserEntity testUser = new UserEntity();
-		testUser.merge(testObjectProducer.produceUser(0, USER_NAME));
+		testUser.merge(testObjectProducer.produceUser(USER_NAME));
 
-		this.entityManager.persist(testUser);
+		this.entityManager.merge(testUser);
 		this.entityManager.flush();
 
 		User user = this.userService.fetchUserByName(USER_NAME);
