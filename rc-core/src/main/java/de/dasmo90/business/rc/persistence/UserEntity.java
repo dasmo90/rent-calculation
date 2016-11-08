@@ -11,7 +11,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "RENT_CALCULATION_POSITION")
+@Table(name = "USER")
 @NamedQueries(
 		@NamedQuery(
 				name = UserEntity.Query.GET_BY_NAME,

@@ -1,4 +1,4 @@
-package de.dasmo90.business.rc.test;
+package de.dasmo90.business.rc;
 
 import de.dasmo90.business.rc.model.RentCalculation;
 import de.dasmo90.business.rc.model.RentCalculationPosition;
@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Component
-public class TestEntityProducer {
+public class TestObjectProducer {
 
 	public RentCalculation produceRentCalculation(long id, String name) {
 		return new RentCalculation() {

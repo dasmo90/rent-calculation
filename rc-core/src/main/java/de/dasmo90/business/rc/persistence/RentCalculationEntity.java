@@ -1,7 +1,6 @@
 package de.dasmo90.business.rc.persistence;
 
-import de.dasmo90.business.rc.AuditableRentCalculation;
-import de.dasmo90.business.rc.api.Auditable;
+import de.dasmo90.business.rc.api.AuditableRentCalculation;
 import de.dasmo90.business.rc.model.RentCalculation;
 import de.dasmo90.business.rc.model.RentCalculationPosition;
 

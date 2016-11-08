@@ -1,4 +1,4 @@
-package de.dasmo90.business.rc.test;
+package de.dasmo90.business.rc;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;

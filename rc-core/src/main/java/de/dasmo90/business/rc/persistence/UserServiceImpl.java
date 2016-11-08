@@ -20,5 +20,4 @@ public class UserServiceImpl implements UserService {
 				.setParameter(UserEntity.Param.NAME, name)
 				.getSingleResult();
 	}
-
 }

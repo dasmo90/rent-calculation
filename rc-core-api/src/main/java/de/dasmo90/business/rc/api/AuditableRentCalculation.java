@@ -1,4 +1,4 @@
-package de.dasmo90.business.rc;
+package de.dasmo90.business.rc.api;
 
 import de.dasmo90.business.rc.api.Auditable;
 import de.dasmo90.business.rc.model.RentCalculation;
