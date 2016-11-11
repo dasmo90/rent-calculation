@@ -4,6 +4,9 @@ import de.dasmo90.business.rc.TestMockFactory;
 import de.dasmo90.business.rc.TestObjectProducer;
 import de.dasmo90.business.rc.TestSpringPersistenceConfig;
 import de.dasmo90.business.rc.api.Auditable;
+import de.dasmo90.business.rc.api.AuditableRentCalculation;
+import de.dasmo90.business.rc.permissions.Permission;
+import de.dasmo90.business.rc.permissions.RentCalculationPermission;
 import de.dasmo90.business.rc.permissions.Role;
 import de.dasmo90.business.rc.service.PermissionService;
 import de.dasmo90.business.rc.service.UserService;
@@ -47,7 +50,7 @@ public class PermissionServiceTest {
 
 	private UserEntity testUser;
 
-	private Auditable auditable;
+	private RentCalculationEntity rentCalculation;
 
 	@Before
 	public void setUp() throws Exception {
@@ -63,6 +66,12 @@ public class PermissionServiceTest {
 		permissionEntity.setRolePermission(testUser, Role.ADMIN);
 
 		this.entityManager.persist(permissionEntity);
+
+		this.rentCalculation = new RentCalculationEntity();
+		this.rentCalculation.setCreator(this.testUser);
+		this.rentCalculation.setModifier(this.testUser);
+
+		this.entityManager.persist(this.rentCalculation);
 
 		this.entityManager.flush();
 	}
@@ -84,5 +93,24 @@ public class PermissionServiceTest {
 
 		Assert.assertEquals(1, roles.size());
 		Assert.assertEquals(Role.ADMIN, roles.get(0));
+	}
+
+	@Test(expected = javax.persistence.NoResultException.class)
+	public void testFetchPermissionNone() {
+		this.permissionService.fetchPermission(testUser, this.rentCalculation);
+	}
+
+	@Test
+	public void testFetchPermission() {
+		PermissionEntity permissionEntity = new PermissionEntity();
+		permissionEntity.setRentCalculationPermission(this.testUser, this.rentCalculation, true, false);
+
+		this.entityManager.persist(permissionEntity);
+		this.entityManager.flush();
+
+		RentCalculationPermission permission = this.permissionService.fetchPermission(testUser, this.rentCalculation);
+
+		Assert.assertEquals(true, permission.getCanRead());
+		Assert.assertEquals(false, permission.getCanUpdate());
 	}
 }

@@ -2,6 +2,9 @@ package de.dasmo90.business.rc.persistence;
 
 import de.dasmo90.business.rc.api.AuditableRentCalculation;
 import de.dasmo90.business.rc.api.User;
+import de.dasmo90.business.rc.model.RentCalculation;
+import de.dasmo90.business.rc.permissions.Permission;
+import de.dasmo90.business.rc.permissions.RentCalculationPermission;
 import de.dasmo90.business.rc.permissions.Role;
 import de.dasmo90.business.rc.service.PermissionService;
 import de.dasmo90.business.rc.service.UserService;
@@ -23,33 +26,31 @@ public class PermissionServiceImpl implements PermissionService {
 	private UserService userService;
 
 	@Override
-	public boolean canRead(User user, AuditableRentCalculation rentCalculation) {
-
-		if (user.getId() == rentCalculation.getCreator().getId()) {
-			return true;
-		}
-		return false;
+	public RentCalculationPermission fetchPermission(User user, AuditableRentCalculation rentCalculation) {
+		final User persistedUser = obtainPersistedUser(user);
+		PermissionEntity permissionEntity = this.entityManager.createNamedQuery(
+				PermissionEntity.Query.FETCH_RC_PERMISSION_BY_USER_ID_AND_RC_ID, PermissionEntity.class)
+				.setParameter(PermissionEntity.Param.USER_ID, persistedUser.getId())
+				.setParameter(PermissionEntity.Param.RC_ID, rentCalculation.getId())
+				.getSingleResult();
+		this.entityManager.detach(permissionEntity);
+		return permissionEntity;
 	}
 
-	@Override
-	public boolean canUpdate(User user, AuditableRentCalculation rentCalculation) {
-		return false;
+	private User obtainPersistedUser(User user) {
+		if (user.getId() == 0) {
+			return this.userService.fetchUserByName(user.getName());
+		} else {
+			return user;
+		}
 	}
 
 	@Override
 	public List<Role> fetchRolesFor(User user) {
-
-		final User persistedUser;
-		if (user.getId() == 0) {
-			persistedUser = this.userService.fetchUserByName(user.getName());
-		} else {
-			persistedUser = user;
-		}
-
+		final User persistedUser = obtainPersistedUser(user);
 		List<PermissionEntity> permissions = this.entityManager.createNamedQuery(
 				PermissionEntity.Query.FETCH_ROLE_PERMISSIONS_BY_USER_ID, PermissionEntity.class)
 				.setParameter(PermissionEntity.Param.USER_ID, persistedUser.getId()).getResultList();
-
 		return permissions.stream().map(PermissionEntity::getRole).collect(Collectors.toList());
 	}
 

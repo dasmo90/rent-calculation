@@ -8,6 +8,7 @@ import de.dasmo90.business.rc.permissions.Role;
 import de.dasmo90.business.rc.permissions.RolePermission;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -25,17 +26,15 @@ import javax.persistence.Table;
 				query = "SELECT permission " +
 						"FROM PermissionEntity permission " +
 						"WHERE permission.role IS NOT NULL " +
-						"AND permission.user.id = :" + PermissionEntity.Param.USER_ID)
+						"AND permission.user.id = :" + PermissionEntity.Param.USER_ID),
+		@NamedQuery(
+				name = PermissionEntity.Query.FETCH_RC_PERMISSION_BY_USER_ID_AND_RC_ID,
+				query = "SELECT permission " +
+						"FROM PermissionEntity permission " +
+						"WHERE permission.rentCalculation.id = :" + PermissionEntity.Param.RC_ID +
+						" AND permission.user.id = :" + PermissionEntity.Param.USER_ID),
 })
 public class PermissionEntity implements RentCalculationPermission, RolePermission {
-
-	public interface Query {
-		String FETCH_ROLE_PERMISSIONS_BY_USER_ID = "fetchRolePermissionsByUserId";
-	}
-
-	public interface Param {
-		String USER_ID = "userId";
-	}
 
 	@Id
 	@GeneratedValue
@@ -58,6 +57,14 @@ public class PermissionEntity implements RentCalculationPermission, RolePermissi
 	protected void setRolePermission(User user, Role role) {
 		this.user = user;
 		this.role = role;
+	}
+
+	protected void setRentCalculationPermission(User user, RentCalculationEntity rentCalculation,
+												boolean canRead, boolean canUpdate) {
+		this.user = user;
+		this.rentCalculation = rentCalculation;
+		this.canRead = canRead;
+		this.canUpdate = canUpdate;
 	}
 
 	@Override
@@ -83,5 +90,15 @@ public class PermissionEntity implements RentCalculationPermission, RolePermissi
 	@Override
 	public User getUser() {
 		return this.user;
+	}
+
+	public interface Query {
+		String FETCH_ROLE_PERMISSIONS_BY_USER_ID = "fetchRolePermissionsByUserId";
+		String FETCH_RC_PERMISSION_BY_USER_ID_AND_RC_ID = "fetchRcPermissionByUserIdAndRcId";
+	}
+
+	public interface Param {
+		String USER_ID = "userId";
+		String RC_ID = "rcId";
 	}
 }
