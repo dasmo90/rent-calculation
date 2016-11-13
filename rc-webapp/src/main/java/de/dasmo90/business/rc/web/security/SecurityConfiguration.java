@@ -18,6 +18,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
+import static de.dasmo90.business.rc.web.controller.RentCalculationController.BASE_PATH;
+import static de.dasmo90.business.rc.web.controller.RentCalculationController.CREATE_METHOD;
+import static de.dasmo90.business.rc.web.controller.RentCalculationController.SAVE_METHOD;
+import static de.dasmo90.business.rc.web.util.PathUtils.path;
+import static de.dasmo90.business.rc.web.util.RoleUtils.hasRole;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -49,8 +55,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/save").access(RoleUtils.hasRole(Role.WRITE))
-				.antMatchers("/create").access(RoleUtils.hasRole(Role.CREATE))
-				.and().formLogin();
+				.antMatchers(path(BASE_PATH, SAVE_METHOD)).access(hasRole(Role.WRITE))
+						.antMatchers(path(BASE_PATH, CREATE_METHOD)).access(hasRole(Role.CREATE))
+						.and().formLogin();
 	}
 }

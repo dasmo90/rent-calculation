@@ -15,18 +15,19 @@ const srcFolder = 'src/main/';
 const CONFIG = {
     src: srcFolder,
     appSrc: srcFolder + 'app/',
-    staticSrc: srcFolder + 'static/'
+    staticSrc: srcFolder + 'static/',
+    dest: 'dist'
 };
 
 // clean the contents of the distribution directory
 gulp.task('clean', function () {
-  return del('dist/**/*');
+  return del([CONFIG.dest + '/index.html', CONFIG.dest + '/app/**/*', CONFIG.dest + '/libs/**/*']);
 });
 
-gulp.task("DEV:scss", function () {
+gulp.task('DEV:scss', function () {
     gulp.src(
-        CONFIG.appSrc + "**/*.scss"
-    ).pipe(scss()).pipe(gulp.dest("dist/app"));
+        CONFIG.appSrc + '**/*.scss'
+    ).pipe(scss()).pipe(gulp.dest(CONFIG.dest + '/app'));
 });
 
 // TypeScript compile
@@ -35,7 +36,7 @@ gulp.task('DEV:compile', function () {
       .pipe(sourcemaps.init())
       .pipe(typescript(tscConfig.compilerOptions))
       .pipe(sourcemaps.write('.'))
-      .pipe(gulp.dest('dist/app'));
+      .pipe(gulp.dest(CONFIG.dest + '/app'));
 });
 
 // copy dependencies
@@ -48,21 +49,21 @@ gulp.task('DEV:libs', function() {
       'core-js/**/*',
       'zone.js/**/*',
       'reflect-metadata/**/*',
-      'systemjs/**/*',
+      'systemjs/**/*'
     ], {cwd : './node_modules', base: './node_modules'})
-    .pipe(gulp.dest('dist/libs'))
+    .pipe(gulp.dest(CONFIG.dest + '/libs'))
 });
 
 // copy components html
 gulp.task('DEV:component-html', function () {
     return gulp.src(['**/*.html'], { cwd: CONFIG.appSrc, base: CONFIG.src })
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest(CONFIG.dest))
 });
 
 // copy static assets - i.e. non TypeScript compiled source
 gulp.task('DEV:static', function() {
-    return gulp.src(['index.html', 'systemjs.config.js'], { cwd: CONFIG.staticSrc, base: CONFIG.staticSrc })
-    .pipe(gulp.dest('dist'))
+    return gulp.src(['index.html', 'app/systemjs.config.js'], { cwd: CONFIG.staticSrc, base: CONFIG.staticSrc })
+    .pipe(gulp.dest(CONFIG.dest))
 });
 
 gulp.task('DEV:build', function (callback) {

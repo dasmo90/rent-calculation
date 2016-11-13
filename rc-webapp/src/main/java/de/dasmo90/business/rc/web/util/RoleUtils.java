@@ -1,4 +1,4 @@
-package de.dasmo90.business.rc.web.security;
+package de.dasmo90.business.rc.web.util;
 
 import de.dasmo90.business.rc.permissions.Role;
 

@@ -20,9 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 
 @RestController
+@RequestMapping(RentCalculationController.BASE_PATH)
 public class RentCalculationController extends AbstractWebUserController {
 
 	private static final Logger LOG = LoggerFactory.getLogger(RentCalculationController.class);
+
+	public static final String BASE_PATH = "/web";
+	public static final String FETCH_METHOD = "/fetch";
+	public static final String CREATE_METHOD = "/create";
+	public static final String SAVE_METHOD = "/save";
 
 	@Autowired
 	private PersistenceService persistenceService;
@@ -30,15 +36,15 @@ public class RentCalculationController extends AbstractWebUserController {
 	@Autowired
 	private PermissionService permissionService;
 
-	@RequestMapping(path = "/create", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(path = CREATE_METHOD, method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<RentCalculation> create() {
 		User user = retrieveUser();
 		RentCalculation rentCalculation = this.persistenceService.create(user);
-		LOG.debug("User {} created calculation.", user.getName());
+		LOG.debug("User {} created calculation with id {}.", user.getName(), rentCalculation.getId());
 		return new ResponseEntity<>(rentCalculation, HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "/fetch", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(path = FETCH_METHOD, method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<RentCalculation> fetch(@RequestParam Long id) {
 		User user = retrieveUser();
 		AuditableRentCalculation auditableRentCalculation =
@@ -46,14 +52,16 @@ public class RentCalculationController extends AbstractWebUserController {
 		RentCalculationPermission permission =
 				this.permissionService.fetchPermission(user, auditableRentCalculation);
 		if (permission.getCanRead()) {
-			LOG.debug("User {} fetched calculation.", user.getName());
+			LOG.debug("User {} fetched calculation with id {}.", user.getName(), auditableRentCalculation.getId());
 			return new ResponseEntity<>(auditableRentCalculation, HttpStatus.OK);
 		} else {
+			LOG.debug("User {} was not allowed to fetch calculation with id",
+					user.getName(), auditableRentCalculation.getId());
 			throw new HttpClientErrorException(HttpStatus.FORBIDDEN);
 		}
 	}
 
-	@RequestMapping(path = "/save", method = RequestMethod.POST,
+	@RequestMapping(path = SAVE_METHOD, method = RequestMethod.POST,
 			produces = "application/json", consumes = "application/json")
 	public ResponseEntity<RentCalculation> save(@RequestBody RentCalculationDto rentCalculation) {
 		User user = retrieveUser();

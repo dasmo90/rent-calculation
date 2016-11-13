@@ -2,6 +2,7 @@ package de.dasmo90.business.rc.web.security;
 
 import de.dasmo90.business.rc.api.User;
 import de.dasmo90.business.rc.permissions.Role;
+import de.dasmo90.business.rc.web.util.RoleUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
