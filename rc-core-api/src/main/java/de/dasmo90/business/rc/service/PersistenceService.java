@@ -9,7 +9,7 @@ public interface PersistenceService {
 
 	AuditableRentCalculation fetchAuditableRentCalculation(long id);
 
-	boolean save(User user, RentCalculation rentCalculation);
+	void save(User user, RentCalculation rentCalculation);
 
 	RentCalculation create(User creator);
 }

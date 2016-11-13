@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Service
-public class PersistenceServiceImpl implements PersistenceService {
+public class PersistenceServiceImpl extends AbstractUserAwareService implements PersistenceService {
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -23,17 +23,25 @@ public class PersistenceServiceImpl implements PersistenceService {
 
 	@Override
 	@Transactional
-	public boolean save(User user, RentCalculation rentCalculation) {
+	public void save(User user, RentCalculation rentCalculation) {
+		User persistedUser = this.obtainPersistedUser(user);
 		RentCalculationEntity rentCalculationEntity = this.entityManager.find(RentCalculationEntity.class,
 				rentCalculation.getId());
+		rentCalculationEntity.setModifier(persistedUser);
 		rentCalculationEntity.merge(rentCalculation);
-		rentCalculationEntity.setModifier(user);
-		return false;
 	}
 
 	@Override
+	@Transactional
 	public RentCalculation create(User user) {
-		return null;
+		User persistedUser = this.obtainPersistedUser(user);
+		RentCalculationEntity rentCalculationEntity = new RentCalculationEntity();
+		rentCalculationEntity.setCreator(persistedUser);
+		rentCalculationEntity.setModifier(persistedUser);
+		this.entityManager.persist(rentCalculationEntity);
+//		this.entityManager.detach(rentCalculationEntity);
+//		this.entityManager.flush();
+		return rentCalculationEntity;
 	}
 
 }
